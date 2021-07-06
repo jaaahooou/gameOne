@@ -2,7 +2,7 @@ import { Quote } from "./Quote.js";
 
 class Game {
     currentStep = 0;
-    lastStep = 8;
+    lastStep = 7;
 
 
     quotes = [{
@@ -52,8 +52,16 @@ class Game {
     }
     guess(letter){
         event.target.disabled = true;
-        this.quote.guess(letter);
-        this.drawQuote();
+        if (this.quote.guess(letter)){
+            this.drawQuote();
+        }else{
+           this.currentStep ++; 
+           document.getElementsByClassName('step')[this.currentStep].style.opacity = 1;
+           if(this.currentStep == this.lastStep){
+               this.loosing();
+           }
+        };
+        
     }
     drawLetters(){
         for (let i=0;i<26;i++){
@@ -70,6 +78,9 @@ class Game {
     drawQuote(){
         const content = this.quote.getContent();
         this.wordWrapper.innerText = content;
+        if(!content.includes('_')){
+            this.winning();
+        }
     }
 
     start(){
@@ -79,6 +90,16 @@ class Game {
 
       
         
+    }
+
+    winning(){
+        this.wordWrapper.innerText = "Gratki, wygrywasz!";
+        this.lettersWrapper.innerText = '';
+    }
+
+    loosing(){
+        this.wordWrapper.innerText = "Niestety przegrywasz. Koniec gry";
+        this.lettersWrapper.innerText = '';
     }
 }
 
