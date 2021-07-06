@@ -1,6 +1,10 @@
 import { Quote } from "./Quote.js";
 
 class Game {
+    currentStep = 0;
+    lastStep = 8;
+
+
     quotes = [{
         text: "pan tadeusz",
         category: "Utwór literacki"
@@ -41,27 +45,38 @@ class Game {
         const {text,category} = this.quotes[Math.floor(Math.random() * this.quotes.length)];
         this.categoryWrapper.innerText = category;
         this.quote = new Quote(text);
+
         console.log(category);
 
 
     }
     guess(letter){
-        console.log(letter)
+        event.target.disabled = true;
+        this.quote.guess(letter);
+        this.drawQuote();
     }
     drawLetters(){
         for (let i=0;i<26;i++){
             const label =(i+10).toString(36);
             const button = document.createElement('button');
             button.innerText = label;
-            button.addEventListener('click',()=>{
-                this.guess(label);
+            button.addEventListener('click',(event)=>{
+                this.guess(label,event);
         })
             this.lettersWrapper.appendChild(button)
     }
-}
+    }
+
+    drawQuote(){
+        const content = this.quote.getContent();
+        this.wordWrapper.innerText = content;
+    }
 
     start(){
+        document.getElementsByClassName('step')[this.currentStep].style.opacity = 1;
         this.drawLetters();
+        this.drawQuote();
+
       
         
     }
