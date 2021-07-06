@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Hangman</title>
 </head>
 <body>
-    <div class="class">Hello</div>
+   <section id="hangman">
+       <div id="output"></div>
+       <div id="word"></div>
+       <div id="category"></div>
+       <div id="letters"></div>
+   </section>
   
 <script src="/app/Game.js"></script>
+<script>
+    const game = new Game({
+        lettersWrapper: document.getElementById('letters'),
+        categoryWrapper: document.getElementById('category'),
+        wordWrapper: document.getElementById('word'),
+        outputWrapper: document.getElementById('output'),
+    });
+    game.start();
+</script>
 </body>
 </html>
