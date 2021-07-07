@@ -1,3 +1,7 @@
+const pol = (30).toString(36);
+console.log(pol);
+
+
 import { Quote } from "./Quote.js";
 
 class Game {
@@ -65,6 +69,8 @@ class Game {
     }
     drawLetters(){
         for (let i=0;i<26;i++){
+            
+            
             const label =(i+10).toString(36);
             const button = document.createElement('button');
             button.innerText = label;
@@ -73,7 +79,11 @@ class Game {
         })
             this.lettersWrapper.appendChild(button)
     }
+
+
     }
+
+
 
     drawQuote(){
         const content = this.quote.getContent();
